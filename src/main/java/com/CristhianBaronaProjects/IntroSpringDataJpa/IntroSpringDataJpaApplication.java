@@ -23,43 +23,56 @@ public class IntroSpringDataJpaApplication {
 	private CustomerCrudRepository customerCrudRepository;
 
 	@Bean
-	public CommandLineRunner testCustomerRepositoryComand(){
+	public CommandLineRunner testQueryMethodCommand(){
 		return args -> {
+
+
 			Customer juan = new Customer();
 			juan.setName("Juan Lopez");
 			juan.setPassword("Juan123");
+			juan.setUsername("Juan123");
 
 			Customer ramon = new Customer();
 			ramon.setName("Ramon Hernandez");
 			ramon.setPassword("ramon123");
+			ramon.setUsername("ramon123");
+
 
 			Customer luis = new Customer();
 			luis.setName("Luis Marquez");
-			luis.setPassword("luis123");
+			luis.setPassword("luism123");
+			luis.setUsername("luism123");
+
+			Customer luis2= new Customer();
+			luis.setName("Luis cañaz");
+			luis.setPassword("luisc123");
+			luis.setUsername("luisc123");
+
 
 			System.out.println("Se guardaron 3 entidades");
-			List<Customer> clientes = List.of(juan, ramon, luis);
-
+			List<Customer> clientes = List.of(juan, ramon, luis, luis2);
 			customerCrudRepository.saveAll(clientes);
 
+			//Pruebas video 1
+			//System.out.println("\n probando Query method findByusername");
+			//System.out.println(customerCrudRepository.searchByUsername("luism123"));
 
+			//Pruebas video 2
+			System.out.println("\n nombre que contienen la letra o");
+			customerCrudRepository.findBynamecontaining("o").
+					forEach(System.out::println);
 
-			System.out.println("\n Imprimiendo todos los clientes.");
-			customerCrudRepository.findAll().forEach(
-					System.out::println
-			);
+			System.out.println("\n nombre que empiecen la letra R");
+			customerCrudRepository.queryBynameStartsWith("R").
+					forEach(System.out::println);
 
-			System.out.println("\n buscando e imprimiendo a cliente juan");
-			Optional<Customer> customerOpt = customerCrudRepository.findById(1L);
-			customerOpt.ifPresent(each ->{
-				each.setName("Ramon Hernandez Cahvez");
-				each.setPassword("ramonhc123");
+			System.out.println("\n nombre que terminen con las palabra ez");
+			customerCrudRepository.readBynameEndingWith("ez").
+					forEach(System.out::println);
 
-				customerCrudRepository.save(each);
-			});
-
-			System.out.println("\n eliminado al cliente juan");
-			customerCrudRepository.deleteById(1L);
+			System.out.println("\n nombre que contiene ez y cuyo id sea mayor o igaul que 2 ");
+			customerCrudRepository.findBynamecontainingandidAndIdGreaterThanEqualOrderByDesc("ez", 3l).
+					forEach(System.out::println);
 
 		};
 	}
