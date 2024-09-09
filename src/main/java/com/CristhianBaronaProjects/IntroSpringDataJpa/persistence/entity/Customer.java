@@ -1,7 +1,6 @@
 package com.CristhianBaronaProjects.IntroSpringDataJpa.persistence.entity;
 
-
-import org.springframework.data.jpa.repository.EntityGraph;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Cliente")

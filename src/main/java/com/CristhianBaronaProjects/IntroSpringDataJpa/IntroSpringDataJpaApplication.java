@@ -8,9 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class IntroSpringDataJpaApplication {
@@ -70,10 +68,17 @@ public class IntroSpringDataJpaApplication {
 			customerCrudRepository.readBynameEndingWith("ez").
 					forEach(System.out::println);
 
-			System.out.println("\n nombre que contiene ez y cuyo id sea mayor o igaul que 2 ");
+			System.out.println("\n nombre que contiene ez y cuyo id sea mayor o igaul que 3 ");
 			customerCrudRepository.findBynamecontainingandidAndIdGreaterThanEqualOrderByDesc("ez", 3l).
 					forEach(System.out::println);
 
+			System.out.println("\n nombre que contiene ez y cuyo id sea mayor o igaul que 3 utilizando JPQL y la anotacion @Query  ");
+			customerCrudRepository.findAllByNameAndIdGreaterThan("ez", 3l).
+					forEach(System.out::println);
+
+			System.out.println("\n nombre que contiene ez y cuyo id sea mayor o igaul que 3 utilizando SQL Nativo ");
+			customerCrudRepository.findAllByNameAndIdGreaterThanUsingNativeSql("ez", 3l).
+					forEach(System.out::println);
 		};
 	}
 }
