@@ -15,8 +15,10 @@ public class Adress {
     @Column(name = "direccion")
     private String address;
 
-    @OneToOne(mappedBy = "adres")
-    private Customer customer;
+    @Column(name = "id_cliente")
+    private Long customerId;
+
+
 
     public long getId() {
         return id;
@@ -42,12 +44,12 @@ public class Adress {
         this.address = address;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     @Override

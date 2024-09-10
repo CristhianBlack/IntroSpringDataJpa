@@ -31,35 +31,18 @@ public class IntroSpringDataJpaApplication {
 			juan.setPassword("Juan123");
 			juan.setUsername("Juan123");
 
-			Adress juanAdress = new Adress();
-			juanAdress.setCountry("El salvador");
-			juanAdress.setAddress("casa 123 calle principal");
-			juan.setAdres(juanAdress);
-
-			Customer ramon = new Customer();
-			ramon.setName("Ramon Hernandez");
-			ramon.setPassword("ramon123");
-			ramon.setUsername("ramon123");
-
-			Adress ramonAdress = new Adress();
-			ramonAdress.setCountry("El salvador");
-			ramonAdress.setAddress("calle abc calle principal");
-			ramon.setAdres(ramonAdress);
+			Adress juanAdressOne = new Adress();
+			juanAdressOne.setCountry("El salvador");
+			juanAdressOne.setAddress("casa 123 calle principal");
 
 
-			Customer luis = new Customer();
-			luis.setName("Luis Marquez");
-			luis.setPassword("luism123");
-			luis.setUsername("luism123");
+			Adress juanAdresstwo = new Adress();
+			juanAdresstwo.setCountry("Honduras");
+			juanAdresstwo.setAddress("casa 123 calle principal b");
+			juan.setAdresses(List.of(juanAdressOne,juanAdresstwo));
 
-			Adress luisAdress = new Adress();
-			luisAdress.setCountry("El salvador");
-			luisAdress.setAddress("casa 123 calle principal");
-			luis.setAdres(luisAdress);
 
-			System.out.println("Se guardaron 3 entidades");
-			List<Customer> clientes = List.of(juan, ramon, luis);
-			customerCrudRepository.saveAll(clientes);
+			customerCrudRepository.save(juan);
 
 
 		};
