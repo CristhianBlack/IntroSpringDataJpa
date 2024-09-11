@@ -31,4 +31,9 @@ public interface CustomerCrudRepository extends JpaRepository<Customer, Long> {
 
     @Query(value = "select c.* from clientes c where c.nombre like %?1% and c.id >= ?2 order by c.username desc", nativeQuery = true )
     List<Customer> findAllByNameAndIdGreaterThanUsingNativeSql(String name, Long id);
+
+    List<Customer> findByAdressesCountry(String country);
+
+    @Query("select c from customer c join fetch adresses addr where addr.country = ?1")
+    List<Customer> findCustomerFrom(String conutry);
 }

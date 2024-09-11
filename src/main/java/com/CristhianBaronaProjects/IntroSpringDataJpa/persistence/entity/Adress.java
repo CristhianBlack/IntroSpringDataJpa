@@ -15,9 +15,9 @@ public class Adress {
     @Column(name = "direccion")
     private String address;
 
-    @Column(name = "id_cliente")
-    private Long customerId;
-
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private  Customer customer;
 
 
     public long getId() {
@@ -44,12 +44,13 @@ public class Adress {
         this.address = address;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override

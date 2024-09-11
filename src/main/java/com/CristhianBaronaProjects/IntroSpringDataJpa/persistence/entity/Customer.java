@@ -1,7 +1,9 @@
 package com.CristhianBaronaProjects.IntroSpringDataJpa.persistence.entity;
 
 import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +22,7 @@ public class Customer {
     @Column(name = "contrasena")
     private String password;
 
-    @OneToMany(targetEntity = Adress.class, cascade = {CascadeType.PERSIST})
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "customer", fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente")
     private List<Adress> adresses;
 
@@ -72,5 +74,13 @@ public class Customer {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public void  addAddress(Adress newAddress){
+        if(newAddress == null) return;
+        if(adresses == null) adresses = new ArrayList<>();
+
+        adresses.add(newAddress);
+        newAddress.setCustomer(this);
     }
 }
